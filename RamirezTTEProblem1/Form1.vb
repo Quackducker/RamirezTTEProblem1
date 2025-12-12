@@ -24,7 +24,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonRead_Click(sender As Object, e As EventArgs) Handles ButtonRead.Click
-        Dim query As String = "SELECT * FROM musicstudio_db.tracks_tbl;"
+        Dim query As String = "SELECT * FROM musicstudio_db.tracks_tbl WHERE is_deleted = 0;"
         Try
             Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=musicstudio_db;")
                 Dim adapter As New MySqlDataAdapter(query, conn)
@@ -40,7 +40,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonEdit_Click(sender As Object, e As EventArgs) Handles ButtonEdit.Click
-        Dim query As String = "UPDATE `musicstudio_db`.`tracks_tbl` SET Title = @Title, Artist = @Artist, Duration = @Duration , Genre = @Genre WHERE `id`=id;"
+        Dim query As String = "UPDATE `musicstudio_db`.`tracks_tbl` SET `Title` = @Title, `Artist` = @Artist, `Duration` = @Duration , `Genre` = @Genre WHERE `id`=@id;"
         Try
             Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=musicstudio_db;")
                 conn.Open()
@@ -65,7 +65,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonDelete_Click(sender As Object, e As EventArgs) Handles ButtonDelete.Click
-        Dim query As String = "UPDATE `musicstudio_db`.`tracks_tbl` SET `is_deleted`=1 WHERE `id`=id;"
+        Dim query As String = "UPDATE `musicstudio_db`.`tracks_tbl` SET `is_deleted`=1 WHERE `id`=@id;"
         Try
             Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=musicstudio_db;")
                 conn.Open()
